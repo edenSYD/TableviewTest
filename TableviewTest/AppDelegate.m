@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "SYDMessageNoticeController.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +17,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = KWhiteColor;
+    [self.window makeKeyAndVisible];
+    [[UIButton appearance]setExclusiveTouch:YES];
+    [UIActivityIndicatorView appearanceWhenContainedInInstancesOfClasses:@[[MBProgressHUD class]]].color = KBlackColor;
+    //出现UIScrollview 漂移问题（基本都是iPhoneX上）
+    if (IOS11) {
+        [[UIScrollView appearance]setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    }
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[[SYDMessageNoticeController alloc]init]];
+    self.window.rootViewController = nav;
     return YES;
 }
 
